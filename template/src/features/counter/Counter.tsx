@@ -30,7 +30,7 @@ const styles: (theme: Theme) => StyleRules<string> = theme =>
       color: "rgb(112, 76, 182)",
       appearance: "none",
       background: "none",
-      fontSize: "32px",
+      fontSize: "calc(16px + 2vmin)",
       paddingLeft: "12px",
       paddingRight: "12px",
       paddingBottom: "4px",
@@ -120,7 +120,13 @@ const Counter = ({ classes }: CounterProps) => {
           </Button>
         </Grid>
       </Grid>
-      <Grid container xs={12} alignItems="center" justify="center" spacing={3}>
+      <Grid
+        container
+        direction="row"
+        alignItems="center"
+        justify="center"
+        spacing={3}
+      >
         <Grid item>
           <Input
             className={classes.textbox}
