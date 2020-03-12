@@ -1,148 +1,125 @@
-import React, { useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import React from "react";
+import logo from "./logo.svg";
+import Counter from "./features/counter/Counter";
 import {
-  decrement,
-  increment,
-  incrementByAmount,
-  incrementAsync,
-  selectCount
-} from "./counterSlice";
-import Grid from "@material-ui/core/Grid";
-import Button from "@material-ui/core/Button";
-import Input from "@material-ui/core/Input";
-import Typography from "@material-ui/core/Typography";
-import stylesold from "./Counter.module.css";
-import {
+  createMuiTheme,
   withStyles,
-  Theme,
-  StyleRules,
   createStyles,
-  WithStyles
+  Theme,
+  WithStyles,
+  StyleRules
+} from "@material-ui/core/styles";
+import {
+  Button,
+  ThemeProvider,
+  MuiThemeProvider,
+  CssBaseline
 } from "@material-ui/core";
+import blue from "@material-ui/core/colors/blue";
+
+const theme = createMuiTheme({
+  palette: {
+    primary: blue,
+    secondary: {
+      main: "#fff"
+    },
+    background: {
+      default: "#fff"
+    }
+  },
+  overrides: {
+    MuiButton: {
+      root: {
+        color: "white",
+        "&:hover": {
+          backgroundColor: blue[700]
+        }
+      }
+    }
+  }
+});
 
 const styles: (theme: Theme) => StyleRules<string> = theme =>
   createStyles({
-    value: {
-      fontSize: "78px"
+    root: {
+      height: "100vh"
     },
-    button: {
-      color: "rgb(112, 76, 182)",
-      appearance: "none",
-      background: "none",
-      fontSize: "32px",
-      paddingLeft: "12px",
-      paddingRight: "12px",
-      paddingBottom: "4px",
-      cursor: "pointer",
-      backgroundColor: "rgba(112, 76, 182, 0.1)",
-      borderRadius: "2px",
-      transition: "all 0.15s",
-      outline: "none",
-      border: "2px solid transparent",
-      "&:hover": {
-        backgroundColor: "#fff",
-        border: "2px solid rgba(112, 76, 182, 0.4)"
-      },
-      "&:focus": {
-        border: "2px solid rgba(112, 76, 182, 0.4)"
-      },
-      "&:active": {
-        backgroundColor: "rgba(112, 76, 182, 0.2)"
-      }
-    },
-    textbox: {
-      fontSize: "32px",
-      width: "64px",
+    app: {
       textAlign: "center"
     },
-    asyncButton: {
-      "&:after": {
-        content: "",
-        backgroundColor: "rgba(112, 76, 182, 0.15)",
-        display: "block",
-        position: "absolute",
-        width: "100%",
-        height: "100%",
-        left: "0",
-        top: "0",
-        opacity: "0",
-        transition: "width 1s linear, opacity 0.5s ease 1s"
-      },
-      "&:active:after": {
-        width: "0%",
-        opacity: "1",
-        transition: "0s"
+    appLogo: {
+      height: "40vmin",
+      pointerEvents: "none",
+      "@media (prefers-reduced-motion: no-preference) ": {
+        animation: "App-logo-float infinite 3s ease-in-out"
       }
+    },
+    appHeader: {
+      minHeight: "100vh",
+      display: "flex",
+      flexDirection: "column",
+      alignItems: "center",
+      justifyContent: "center",
+      fontSize: "calc(10px + 2vmin)"
+    },
+    appLink: {
+      color: "rgb(112, 76, 182)"
     }
   });
 
-type CounterProps = {} & WithStyles<typeof styles>;
+type AppProps = {} & WithStyles<typeof styles>;
 
-const Counter = ({ classes }: CounterProps) => {
-  const count = useSelector(selectCount);
-  const dispatch = useDispatch();
-  const [incrementAmount, setIncrementAmount] = useState("2");
+const App = ({ classes }: AppProps) => (
+  <MuiThemeProvider theme={theme}>
+    <CssBaseline />
+    <div className={classes.app}>
+      <header className={classes.appHeader}>
+        <img src={logo} className={classes.appLogo} alt="logo" />
+        <Counter />
+        <p>
+          Edit <code>src/App.tsx</code> and save to reload.
+        </p>
+        <span>
+          <span>Learn </span>
+          <a
+            className={classes.appLink}
+            href="https://reactjs.org/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            React
+          </a>
+          <span>, </span>
+          <a
+            className={classes.appLink}
+            href="https://redux.js.org/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Redux
+          </a>
+          <span>, </span>
+          <a
+            className={classes.appLink}
+            href="https://redux-toolkit.js.org/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Redux Toolkit
+          </a>
+          ,<span> and </span>
+          <a
+            className={classes.appLink}
+            href="https://react-redux.js.org/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            React Redux
+          </a>
+        </span>
+      </header>
+    </div>
+  </MuiThemeProvider>
+);
 
-  return (
-    <React.Fragment>
-      <Grid container xs={12} alignItems="center" justify="center" spacing={3}>
-        <Grid item>
-          <Button
-            className={classes.button}
-            aria-label="Increment value"
-            onClick={() => dispatch(increment())}
-          >
-            +
-          </Button>
-        </Grid>
-        <Grid item>
-          <Typography className={classes.value} variant="body1">
-            {count}
-          </Typography>
-        </Grid>
-        <Grid item>
-          <Button
-            className={classes.button}
-            aria-label="Decrement value"
-            onClick={() => dispatch(decrement())}
-          >
-            -
-          </Button>
-        </Grid>
-      </Grid>
-      <Grid container xs={12} alignItems="center" justify="center" spacing={3}>
-        <Grid item>
-          <Input
-            className={classes.textbox}
-            inputProps={{ className: classes.textbox }}
-            aria-label="Set increment amount"
-            value={incrementAmount}
-            onChange={e => setIncrementAmount(e.target.value)}
-          />
-        </Grid>
-        <Grid item>
-          <Button
-            className={classes.button}
-            onClick={() =>
-              dispatch(incrementByAmount(Number(incrementAmount) || 0))
-            }
-          >
-            Add Amount
-          </Button>
-        </Grid>
-        <Grid item>
-          <Button
-            className={[classes.button, classes.asyncButton].join(" ")}
-            onClick={() =>
-              dispatch(incrementAsync(Number(incrementAmount) || 0))
-            }
-          >
-            Add Async
-          </Button>
-        </Grid>
-      </Grid>
-    </React.Fragment>
-  );
-};
-
-export default withStyles(styles)(Counter);
+export default withStyles(styles)(App);
