@@ -11,13 +11,13 @@ import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
 import Input from "@material-ui/core/Input";
 import Typography from "@material-ui/core/Typography";
-import stylesold from "./Counter.module.css";
 import {
   withStyles,
   Theme,
   StyleRules,
   createStyles,
-  WithStyles
+  WithStyles,
+  CircularProgress
 } from "@material-ui/core";
 
 const styles: (theme: Theme) => StyleRules<string> = theme =>
@@ -40,8 +40,8 @@ const styles: (theme: Theme) => StyleRules<string> = theme =>
       transition: "all 0.15s",
       outline: "none",
       border: "2px solid transparent",
+      textTransform: "none",
       "&:hover": {
-        backgroundColor: "#fff",
         border: "2px solid rgba(112, 76, 182, 0.4)"
       },
       "&:focus": {
@@ -67,7 +67,7 @@ const styles: (theme: Theme) => StyleRules<string> = theme =>
         left: "0",
         top: "0",
         opacity: "0",
-        transition: "width 1s linear, opacity 0.5s ease 1s",
+        transition: "width 1s linear, opacity 0.5s ease 1s"
       },
       "&:active:after": {
         width: "0%",
@@ -83,60 +83,74 @@ const Counter = ({ classes }: CounterProps) => {
   const count = useSelector(selectCount);
   const dispatch = useDispatch();
   const [incrementAmount, setIncrementAmount] = useState("2");
+  const [isWorking, setIsWorking] = useState(false);
 
+  const doAsyncInc = () => {
+    setIsWorking(true);
+    dispatch(incrementAsync(Number(incrementAmount || 0)));
+
+    setTimeout(() => {
+      setIsWorking(false);
+    }, 1000);
+  };
   return (
     <React.Fragment>
-    <Grid container xs={12} alignItems="center" justify="center" spacing={3}>
-      <Grid item>
-        <Button
-          className={classes.button}
-          aria-label="Increment value"
-          onClick={() => dispatch(increment())}
-        >
-          +
-        </Button>
-      </Grid>
-      <Grid item>
-        <Typography className={classes.value} variant="body1">
-          {count}
-        </Typography>
-      </Grid>
-      <Grid item>
-        <Button
-          className={classes.button}
-          aria-label="Decrement value"
-          onClick={() => dispatch(decrement())}
-        >
-          -
-        </Button>
-      </Grid>
+      <Grid container xs={12} alignItems="center" justify="center" spacing={3}>
+        <Grid item>
+          <Button
+            className={classes.button}
+            aria-label="Increment value"
+            onClick={() => dispatch(increment())}
+          >
+            +
+          </Button>
+        </Grid>
+        <Grid item>
+          <Typography className={classes.value} variant="body1">
+            {count}
+          </Typography>
+        </Grid>
+        <Grid item>
+          <Button
+            className={classes.button}
+            aria-label="Decrement value"
+            onClick={() => dispatch(decrement())}
+          >
+            -
+          </Button>
+        </Grid>
       </Grid>
       <Grid container xs={12} alignItems="center" justify="center" spacing={3}>
         <Grid item>
-        <Input
-          className={classes.textbox}
-          aria-label="Set increment amount"
-          value={incrementAmount}
-          onChange={e => setIncrementAmount(e.target.value)}
-        />
+          <Input
+            className={classes.textbox}
+            aria-label="Set increment amount"
+            value={incrementAmount}
+            onChange={e => setIncrementAmount(e.target.value)}
+          />
         </Grid>
         <Grid item>
-        <Button
-          className={classes.button}
-          onClick={() =>
-            dispatch(incrementByAmount(Number(incrementAmount) || 0))
-          }
-        >
-          Add Amount
-        </Button>
+          <Button
+            className={classes.button}
+            onClick={() =>
+              dispatch(incrementByAmount(Number(incrementAmount) || 0))
+            }
+          >
+            Add Amount
+          </Button>
         </Grid>
         <Grid item>
-        <Button
-          className={[classes.button, classes.asyncButton].join(" ")}
-          onClick={() => dispatch(incrementAsync(Number(incrementAmount) || 0))}
-        >
-          Add Async
-        </Button>
+          {!isWorking && (
+            <Button
+              className={[classes.button, classes.asyncButton].join(" ")}
+              onClick={() => {
+                doAsyncInc();
+              }}
+            >
+              Add Async
+            </Button>
+          )}
+          {isWorking && <CircularProgress />}
         </Grid>
       </Grid>
     </React.Fragment>
