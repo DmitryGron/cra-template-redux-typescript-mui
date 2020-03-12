@@ -23,7 +23,8 @@ import {
 const styles: (theme: Theme) => StyleRules<string> = theme =>
   createStyles({
     value: {
-      fontSize: "78px"
+      fontSize: "78px",
+      fontFamily: "'Courier New', Courier, monospace"
     },
     button: {
       color: "rgb(112, 76, 182)",
