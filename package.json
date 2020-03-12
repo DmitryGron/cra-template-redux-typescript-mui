@@ -20,14 +20,14 @@
   "main": "template.json",
   "repository": {
     "type": "git",
-    "url": "https://github.com/jacobbaker/cra-template-redux-typescript"
+    "url": "https://github.com/jacobbaker/cra-template-redux-typescript-mui"
   },
   "license": "MIT",
   "engines": {
     "node": ">=8.10"
   },
   "bugs": {
-    "url": "https://github.com/jacobbaker/cra-template-redux-typescript/issues"
+    "url": "https://github.com/jacobbaker/cra-template-redux-typescript-mui/issues"
   },
   "files": [
     "template",
