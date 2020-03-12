@@ -99,10 +99,10 @@ const Counter = ({ classes }: CounterProps) => {
         <Grid item>
           <Button
             className={classes.button}
-            aria-label="Increment value"
-            onClick={() => dispatch(increment())}
+            aria-label="Decrement value"
+            onClick={() => dispatch(decrement())}
           >
-            +
+            -
           </Button>
         </Grid>
         <Grid item>
@@ -113,10 +113,10 @@ const Counter = ({ classes }: CounterProps) => {
         <Grid item>
           <Button
             className={classes.button}
-            aria-label="Decrement value"
-            onClick={() => dispatch(decrement())}
+            aria-label="Increment value"
+            onClick={() => dispatch(increment())}
           >
-            -
+            +
           </Button>
         </Grid>
       </Grid>
