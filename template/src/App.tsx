@@ -1,6 +1,6 @@
-import React from 'react';
-import logo from './logo.svg';
-import { Counter } from './features/counter/Counter';
+import React from "react";
+import logo from "./logo.svg";
+import { Counter } from "./features/counter/Counter";
 import {
   createMuiTheme,
   withStyles,
@@ -9,7 +9,12 @@ import {
   WithStyles,
   StyleRules
 } from "@material-ui/core/styles";
-import { Button, ThemeProvider } from "@material-ui/core";
+import {
+  Button,
+  ThemeProvider,
+  MuiThemeProvider,
+  CssBaseline
+} from "@material-ui/core";
 import blue from "@material-ui/core/colors/blue";
 
 const theme = createMuiTheme({
@@ -19,7 +24,7 @@ const theme = createMuiTheme({
       main: "#fff"
     },
     background: {
-      default: '#fff'
+      default: "#fff"
     }
   },
   overrides: {
@@ -58,13 +63,15 @@ const styles: (theme: Theme) => StyleRules<string> = theme =>
       fontSize: "calc(10px + 2vmin)"
     },
     appLink: {
-      color: "rgb(112, 76, 182)";
+      color: "rgb(112, 76, 182)"
     }
   });
 
-  type AppProps = {} & WithStyles<typeof styles>;
+type AppProps = {} & WithStyles<typeof styles>;
 
-const App = ({classes}: AppProps) => (
+const App = ({ classes }: AppProps) => (
+  <MuiThemeProvider theme={theme}>
+    <CssBaseline />
     <div className={classes.app}>
       <header className={classes.appHeader}>
         <img src={logo} className={classes.appLogo} alt="logo" />
@@ -112,6 +119,7 @@ const App = ({classes}: AppProps) => (
         </span>
       </header>
     </div>
-  );
+  </MuiThemeProvider>
+);
 
-  export default withStyles(styles)(App);
+export default withStyles(styles)(App);
