@@ -105,7 +105,7 @@ const App = ({ classes }: AppProps) => (
           >
             Redux Toolkit
           </a>
-          ,<span> and </span>
+          <span>, </span>
           <a
             className={classes.appLink}
             href="https://react-redux.js.org/"
@@ -113,6 +113,15 @@ const App = ({ classes }: AppProps) => (
             rel="noopener noreferrer"
           >
             React Redux
+          </a>
+          <span>, and </span>
+          <a
+            className={classes.appLink}
+            href="https://material-ui.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Material-UI
           </a>
         </span>
       </header>
