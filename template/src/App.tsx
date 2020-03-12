@@ -10,8 +10,6 @@ import {
   StyleRules
 } from "@material-ui/core/styles";
 import {
-  Button,
-  ThemeProvider,
   MuiThemeProvider,
   CssBaseline
 } from "@material-ui/core";
