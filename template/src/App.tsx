@@ -11,28 +11,18 @@ import {
 } from "@material-ui/core/styles";
 import {
   MuiThemeProvider,
-  CssBaseline
+  CssBaseline,
 } from "@material-ui/core";
-import blue from "@material-ui/core/colors/blue";
+import purple from "@material-ui/core/colors/purple";
 
 const theme = createMuiTheme({
   palette: {
-    primary: blue,
+    primary: purple,
     secondary: {
       main: "#fff"
     },
     background: {
       default: "#fff"
-    }
-  },
-  overrides: {
-    MuiButton: {
-      root: {
-        color: "white",
-        "&:hover": {
-          backgroundColor: blue[700]
-        }
-      }
     }
   }
 });
@@ -40,7 +30,7 @@ const theme = createMuiTheme({
 const styles: (theme: Theme) => StyleRules<string> = theme =>
   createStyles({
     root: {
-      height: "100vh"
+      
     },
     app: {
       textAlign: "center"
