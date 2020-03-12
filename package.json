@@ -1,5 +1,5 @@
 {
-  "name": "cra-template-redux-typescript",
+  "name": "cra-template-redux-typescript-mui",
   "version": "1.0.0",
   "scripts": {
     "prettify": "prettier --trailing-comma es5 --single-quote --write './template/src/**/*.{ts,tsx}'",
@@ -13,20 +13,21 @@
     "typescript",
     "redux",
     "reduxjs",
-    "react-redux"
+    "react-redux",
+    "material-ui"
   ],
-  "description": "The official Redux+TS template for Create React App",
+  "description": "Fork of the Redux+Typescript (https://github.com/reduxjs/cra-template-redux-typescript.git) template that adds Material-UI.",
   "main": "template.json",
   "repository": {
     "type": "git",
-    "url": "https://github.com/reduxjs/cra-template-redux-typescript.git"
+    "url": "https://github.com/jacobbaker/cra-template-redux-typescript"
   },
   "license": "MIT",
   "engines": {
     "node": ">=8.10"
   },
   "bugs": {
-    "url": "https://github.com/reduxjs/cra-template-redux-typescript/issues"
+    "url": "https://github.com/jacobbaker/cra-template-redux-typescript/issues"
   },
   "files": [
     "template",
