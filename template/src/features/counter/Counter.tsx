@@ -124,6 +124,7 @@ const Counter = ({ classes }: CounterProps) => {
         <Grid item>
           <Input
             className={classes.textbox}
+            inputProps={{ className: classes.textbox }}
             aria-label="Set increment amount"
             value={incrementAmount}
             onChange={e => setIncrementAmount(e.target.value)}
